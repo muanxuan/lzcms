@@ -1,0 +1,339 @@
+ul{list-style: none}
+a{color: #000; text-decoration: none}
+.header{
+    width: 100%;
+    height: 170px;
+    background-color: #fff562;
+}
+.logo{
+    width: 280px;
+    height: 72px;
+    margin: 0 auto;
+    padding-top: 14px;
+}
+.logo img{
+    width: 280px;
+    height: 72px;
+}
+
+.nav-box{
+    padding: 14px;
+}
+.nav{
+    width: 100%;
+    height: 50px;
+    background: #ffc400;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.nav ul {
+    width: 100%;
+}
+.nav ul li{
+    float: left;
+    width: 25%;
+
+    text-align: center;
+}
+
+.nav ul li a{
+    width: 100%;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    line-height: 50px;
+    font-family: "Microsoft Yahei","Tahoma","SimSun";
+}
+
+.nav ul li a:hover{
+    background: #fff;
+}
+
+.nav ul .active a{
+    background: #fff;
+}
+
+.item-header{
+    height: 46px;
+    background: #ffc400;
+    padding: 0 14px;
+    position: relative;
+}
+/*banner*/
+.banner{
+    padding-bottom: 10px;
+}
+#owl-demo .item{
+    margin: 3px;
+}
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: 260px;
+}
+
+#owl-demo .item p{
+    padding: 0 14px;
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    z-index: 999;
+    background: #000;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    filter:alpha(opacity=70); /* IE */ -moz-opacity:0.7; /* Moz + FF */
+    opacity:0.7;
+}
+
+#owl-demo .item p a{
+    color: #fff;
+    font-size: 18px;
+}
+
+/*banner end*/
+.item-header{
+    color: #000;
+}
+.item-header .itm-t{
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    line-height: 24px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.item-header .itm-t i{
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+
+.item-header .itm-t .icon-tuijian{
+    background: url("../images/tuijian.png") 0 -4px no-repeat;
+}
+
+.item-header .itm-t .icon-about{
+    background: url("../images/about.png") 0 -3px no-repeat;
+}
+
+.item-header .itm-m{
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 18px;
+}
+
+.item-content{
+    width: 100%;
+}
+
+.item-content ul li{
+    position: relative;
+    display: block;
+    padding: 14px 0;
+    height: 80px;
+    border-bottom: #b5b4b4 solid 1px;
+}
+.item-content ul li:last-child{
+    border: none;
+}
+.item-content ul li .t-img{
+    width: 80px;
+    height: 80px;
+    float: left;
+    background-color: #e6e6e6;
+    border: #9c9999 solid 1px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 14px;
+}
+
+.item-content ul li .t-img img{
+    width: 80px;
+    height: 80px;
+}
+
+.item-content ul li .t-text{
+    width: 206px;
+    height: 70px;
+    float: left;
+    padding: 5px 0;
+}
+
+.item-content ul li .t-text p{
+    font-size: 14px;
+    line-height: 20px;
+}
+.item-content ul li .t-text .t-text-type a{
+    padding: 0 5px;
+}
+.item-content ul li .t-text .title{
+    font-size: 18px;
+    font-family: "Microsoft Yahei","Tahoma","SimSun";
+    /*font-weight: bold;*/
+    line-height: 30px;
+}
+
+.item-content ul li .more{
+    width: 15px;
+    height: 29px;
+    position: absolute;
+    top: 38px;
+    right: 18px;
+    display: inline-block;
+    background: url("../images/item_more.png") no-repeat;
+}
+
+.index-about{
+    padding: 8px;
+}
+
+.index-about p{
+    padding: 3px 0;
+    font-size: 14px;
+    line-height: 22px;
+    text-indent: 28px;
+}
+
+.footer{
+    height: 53px;
+    background: #ffc400;
+    line-height: 53px;
+}
+.footer ul li{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+.footer a{
+    font-size: 14px;
+    padding: 8px;
+    background: #fff;
+    border: #dba903 solid 1px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.footer-content {
+    padding: 10px 0;
+}
+.footer-content p{
+    font-size: 12px;
+    line-height: 22px;
+    color: #727171;
+    text-align: center;
+}
+
+.footer-content p span{
+    padding: 5px;
+}
+
+.footer-content p a{
+    color: #727171;
+}
+
+/*产品*/
+.page-nav{
+    height: 46px;
+    background: #efefef;
+    line-height: 46px;
+    padding-left: 14px;
+    border-top:#b5b4b4 solid 1px;
+    border-bottom:#b5b4b4 solid 1px;
+}
+.page-nav a,.page-nav span{
+    padding: 0 8px;
+    font-size: 14px;
+}
+
+.product-info{
+    border-top:#b5b4b4 solid 1px;
+    border-bottom:#b5b4b4 solid 1px;
+    padding: 8px 0;
+}
+
+.pro-if-h{
+    height: 32px;
+    line-height: 32px;
+}
+.pro-if-h span{
+    padding: 0 14px;
+}
+
+.product-info .info-tr td{
+    padding: 5px;
+    font-size: 12px;
+    color: #666;
+    /*text-align: center;*/
+}
+.product-get table{
+    width: 100%;
+}
+.product-get table td{
+    width: 33%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.product-get table td a{
+    width: 80px;
+    height: 42px;
+    text-align: left;
+    display: inline-block;
+    background: url("../images/product_get_icons.png") no-repeat;
+    line-height: 42px;
+    padding-left: 50px;
+    font-size: 16px;
+    font-family: "Microsoft Yahei","Tahoma","SimSun";
+}
+
+.product-get table td .phone-get{
+    background-position: 0 -65px;
+}
+
+.product-get table td .address_get{
+    background-position: 0 -129px;
+}
+
+.product-item-header{
+    height: 42px;
+    line-height: 42px;
+    background: #dbdada;
+    border-top:#b5b4b4 solid 1px;
+    border-bottom:#b5b4b4 solid 1px;
+}
+.product-item-header p{
+    padding-left: 18px;
+}
+
+.product-item-content{
+    padding: 10px 14px;
+}
+
+.product-item-content .product-info-num img{
+    width: 100%;
+}
+
+.product-item-content .product-info-num p{
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 5px;
+    text-indent: 24px;
+    color: #333;
+}
+
+.product-item-content .product-info-text p{
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 5px;
+    /*text-indent: 24px;*/
+    color: #333;
+}
+
+.product-img img{
+    width: 100%;
+    height: 40%;
+}

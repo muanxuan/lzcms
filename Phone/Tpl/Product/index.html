@@ -1,0 +1,44 @@
+<include file="./Phone/Tpl/Public/product_header.html" />
+    <div class="banner">
+        <div id="owl-demo" class="owl-carousel owl-theme">
+
+                <volist name="banner" id="data">
+                    <div class="item">
+                        <p><a href="<{$data.url}>"><{$data.title}></a></p>
+                        <img src="<{$data.img}>" alt="<{$data.title}>">
+                    </div>
+                </volist>
+
+        </div>
+    </div>
+    <div class="item-header">
+        <a href="#" class="itm-t">
+            <i class="icon-tuijian"></i>产品系列</a>
+    </div>
+    <div class="item-content">
+        <ul>
+            <volist name="productList" id="data">
+            <li>
+                <a href="#">
+                    <div class="t-img">
+                        <img src="<{$data.img}>">
+                    </div>
+                    <div class="t-text">
+                        <p class="title"><{$data.type_name}></p>
+                        <p class="t-text-type"><span>型号：</span>
+                            <if condition="$data.size gt 0">
+                                <volist name="data.lower" id="lower">
+                                    <a href="__URL__/detail/id/<{$lower.id}>"><{$lower.number}></a>
+                                </volist>
+                                <else />
+                                暂无产品
+                            </if>
+                        </p>
+                    </div>
+                    <div class="more"></div>
+                </a>
+            </li>
+            </volist>
+        </ul>
+    </div>
+<include file="./Phone/Tpl/Public/footer.html" />

@@ -1,0 +1,32 @@
+<include file="./Phone/Tpl/Public/news_header.html" />
+<volist name="data" id="data">
+<div class="page-nav">
+    <a href="__APP__/product">新闻中心</a>&gt;<span>公司新闻</span>&gt;<span><{$data.title}></span>
+</div>
+<div class="product-img">
+    <img src="<{$data.img}>" alt="<{$data.name}>">
+</div>
+<div class="product-info">
+    <table style="width: 100%;">
+        <tr>
+            <td colspan="2">
+                <div class="pro-if-h">
+                    <span><{$data.title}></span>
+                </div>
+            </td>
+        </tr>
+        <tr class="info-tr">
+            <td style="width: 33%"><span>公司新闻：</span></td>
+            <td style="width: 33%"><span><{$data.author}></span></td>
+            <td style="width: 33%"><span><{$data.update_time}></span></td>
+        </tr>
+    </table>
+</div>
+<!--<div class="product-item-header">-->
+    <!--<p>内容</p>-->
+<!--</div>-->
+<div class="product-item-content">
+    <{$data.content}>
+</div>
+</volist>
+<include file="./Phone/Tpl/Public/footer.html" />

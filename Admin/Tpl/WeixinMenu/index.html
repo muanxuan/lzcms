@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> 搜索表单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="__PUBLIC__/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/page-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="container">
+
+    <div class="search-grid-container">
+        <div id="grid"></div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/config-min.js"></script>
+<script type="text/javascript">
+    BUI.use(['bui/extensions/treegrid','bui/data'],function (TreeGrid,Data) {
+        var store = new Data.TreeStore({
+            url : '__URL__/menuJson',
+            autoLoad : true
+        });
+        //由于这个树，不显示根节点，所以可以不指定根节点
+        var tree = new TreeGrid({
+            render : '#grid',
+            store  :store,
+//            nodes : data,
+            columns : [
+                {title : '按钮名称',dataIndex :'name',width:300},
+                {title : '类型',dataIndex :'type',width:100},
+                {title : '菜单KEY值',dataIndex :'key',width:100},
+                {title : '链接',dataIndex : 'url',width:150}
+            ],
+            tbar:{
+                // items:工具栏的项， 可以是按钮(bar-item-button)、 文本(bar-item-text)、 默认(bar-item)、 分隔符(bar-item-separator)以及自定义项
+                items:[{
+                    //xclass:'bar-item-button',默认的是按钮
+                    btnCls : 'button button-small',
+                    text:'增加下级菜单',
+                    handler:function(){
+                        var selected =  tree.getSelected( );
+                        if(selected == null){
+                            BUI.Message.Alert('请选择一项！','error');
+                        }else if(selected.superior != 0){
+                            BUI.Message.Alert('微信只允许有二级菜单！','error');
+                        }else{
+
+                        }
+                    }
+                }, {
+                    xclass:'bar-item-text',
+                    text:'<a href="#">链接</a>'
+                }]
+            },
+            height:250
+        });
+        tree.render();
+    });
+</script>
+
+</body>
+</html>

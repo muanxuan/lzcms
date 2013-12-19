@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>添加 - Banner管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="__PUBLIC__/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/page-min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #info_img{
+            width: 320px;
+            height: 110px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<volist name="bannerdata" id="data">
+<div class="container">
+    <div class="row">
+        <form id="J_Form" action="__URL__/doModify/id/<{$data.id}>" class="form-horizontal span24" >
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>Banner标题：</label>
+                    <div class="controls">
+                        <input type="text" name="title" value="<{$data.title}>"  data-rules="{required:true}" class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>Banner链接：</label>
+                    <div class="controls">
+                        <input type="text" name="url" value="<{$data.url}>"  data-rules="{required:true}" class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>Banner类型：</label>
+                    <div class="controls">
+                        <select  data-rules="{required:true}"  name="type_id" class="input-normal" id="inputType" style="width: 150px">
+                            <option value="">请选择</option>
+                            <volist name="banner_type" id="vo">
+                                <option value="<{$vo.id}>"><{$vo.name}></option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group control-row4 span5" style="height: 130px;">
+                    <label class="control-label">Banner配图：</label>
+                    <div class="controls">
+                        <input type="hidden" value="<{$data.img}>" id="picture" name="img" /><button type="button" class="btn btn-primary btn-xs" id="upLoadImg" >上传图片</button>
+                        <script type="text/plain" id="upload_ue"></script>
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <div class="controls">
+                        <img src="<{$data.img}>" id="info_img"  style="border: #c3c3d6 solid 1px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="row form-actions actions-bar">
+                <div class="span13 offset3 ">
+                    <button type="submit" class="button button-primary">修改</button>
+                    <button type="reset" class="button">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<script type="text/javascript" src="__PUBLIC__/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+    window.UEDITOR_HOME_URL = "__PUBLIC__/Ueditor/";
+</script>
+<load href="__PUBLIC__/Ueditor/ueditor.config.js" />
+<load href="__PUBLIC__/Ueditor/ueditor.all.min.js" />
+<script type="text/javascript" src="__PUBLIC__/assets/js/bui-min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/assets/js/config-min.js"></script>
+<script type="text/javascript">
+    BUI.use('common/page');
+</script>
+<!-- 仅仅为了显示代码使用，不要在项目中引入使用-->
+<script type="text/javascript" src="__PUBLIC__/assets/js/prettify.js"></script>
+<script type="text/javascript">
+    $(function () {
+        prettyPrint();
+    });
+</script>
+<script type="text/javascript">
+    BUI.use('bui/form',function(Form){
+        new Form.HForm({
+            srcNode : '#J_Form',
+            submitType : 'ajax',
+            callback : function(data){
+                if(data.success){
+                    top.topManager.openPage({
+                        id : 'banner-list',
+                        isClose : true
+                    });
+                }else{
+                    BUI.Message.Alert('添加失败','error');
+                }
+            }
+        }).render();
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        $("#inputType option[value='<{$data.type_id}>']").attr("selected","true");
+        $('#info_img').show();
+        /*图片上传*/
+        var _editor = UE.getEditor('upload_ue');
+        _editor.ready(function () {
+            //设置编辑器不可用
+            _editor.setDisabled();
+            //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+            _editor.hide();
+            //侦听图片上传
+            _editor.addListener('beforeInsertImage', function (t, arg) {
+                //将地址赋值给相应的input,只去第一张图片的路径
+                $("#picture").val(arg[0].src);
+                $('#info_img').attr('src',arg[0].src).show();
+                //图片预览
+//                                        $("#preview").attr("src", arg[0].src);
+            })
+            //侦听文件上传，取上传文件列表中第一个上传的文件的路径
+            _editor.addListener('afterUpfile', function (t, arg) {
+                $("#file").attr("value", _editor.options.filePath + arg[0].url);
+            })
+
+        });
+
+        $('#upLoadImg').click(function(){
+            var myImage = _editor.getDialog("insertimage");
+            myImage.open();
+        });
+
+    });
+</script>
+</volist>
+</body>
+</html>

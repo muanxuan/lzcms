@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    $(function() {
+        var mode_name = '<{$module_name}>';
+        mode_name = mode_name.toLowerCase();
+        $('#'+mode_name).addClass('active');
+
+    });
+</script>
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="__APP__">云动微信系统</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <foreach name="menu" item="menu">
+                    <eq name="menu.iflower" value="0">
+                        <li id="<{$menu.name}>"><a href="__APP__/<{$menu.url}>" ><{$menu.title}></a></li>
+                    </eq>
+                    <gt name="menu.iflower" value="0">
+                        <li class="dropdown" id="<{$menu.name}>">
+                            <a href="__APP__/<{$menu.url}>" class="dropdown-toggle" data-toggle="dropdown"><{$menu.title}><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <foreach name="menu.lower" item="vo">
+                                    <li><a href="__APP__/<{$vo.url}>"><{$vo.title}></a></li>
+                                </foreach>
+                            </ul>
+                        </li>
+                    </gt>
+
+                </foreach>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</div><!-- /.navbar -->
+

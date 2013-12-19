@@ -1,0 +1,40 @@
+<include file="./Phone/Tpl/Public/product_header.html" />
+<volist name="detail" id="data">
+<div class="page-nav">
+    <a href="__APP__/product">产品中心</a>&gt;<span><{$data.typeName}></span>&gt;<span><{$data.number}></span>
+</div>
+<div class="product-img">
+    <img src="<{$data.img}>" alt="<{$data.name}>">
+</div>
+<div class="product-info">
+    <table style="width: 100%;">
+        <tr>
+            <td colspan="2">
+                <div class="pro-if-h">
+                    <span><{$data.typeName}></span><span><{$data.name}></span><span><{$data.number}></span>
+                </div>
+            </td>
+        </tr>
+        <tr class="info-tr">
+            <td style="width: 46%"><span>铲斗容量：</span><span>0.18～0.25</span>m3</td>
+            <td style="width: 46%"><span>额定功率：</span><span>39.8/2200</span>Kw/rpm</td>
+        </tr>
+    </table>
+</div>
+<div class="product-get">
+    <table>
+        <tr>
+            <td><a href="#" class="phone-get">电话询价</a></td>
+            <td><a href="">E-mail询价</a></td>
+            <!--<td><a href="" class="address_get">我的地址</a></td>-->
+        </tr>
+    </table>
+</div>
+<div class="product-item-header">
+    <p>产品简介</p>
+</div>
+<div class="product-item-content">
+    <{$data.content}>
+</div>
+</volist>
+<include file="./Phone/Tpl/Public/footer.html" />

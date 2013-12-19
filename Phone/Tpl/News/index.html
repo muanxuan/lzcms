@@ -1,0 +1,35 @@
+<include file="./Phone/Tpl/Public/news_header.html" />
+    <div class="banner">
+        <div id="owl-demo" class="owl-carousel owl-theme">
+            <volist name="banner" id="data">
+                <div class="item">
+                    <p><a href="<{$data.url}>"><{$data.title}></a></p>
+                    <img src="<{$data.img}>" alt="<{$data.title}>">
+                </div>
+            </volist>
+        </div>
+    </div>
+    <div class="item-header">
+        <a href="#" class="itm-t">
+        公司新闻</a>
+    </div>
+    <div class="item-content">
+        <ul>
+            <volist name="news" id="data">
+                <li>
+                    <a href="__URL__/detail/id/<{$data.id}>">
+                        <div class="t-img">
+                            <img src="<{$data.img}>">
+                        </div>
+                        <div class="t-text">
+                            <p class="title"><{$data.title}></p>
+                            <p>作者：<{$data.author}></p>
+                            <p>时间：<{$data.update_time}></p>
+                        </div>
+                        <div class="more"></div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+    </div>
+<include file="./Phone/Tpl/Public/footer.html" />

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>添加 - 文章中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="__PUBLIC__/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/page-min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #info_img{
+            width: 320px;
+            height: 110px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<volist name="article" id="data">
+<div class="container">
+    <div class="row">
+
+        <form id="J_Form" class="form-horizontal span24" action="__URL__/doModify/id/<{$data.id}>"  >
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>文章标题：</label>
+                    <div class="controls">
+                        <input type="text" name="title" value="<{$data.title}>"  data-rules="{required:true}" class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label"><s>*</s>文章类型：</label>
+                    <div class="controls">
+                        <select  data-rules="{required:true}"  name="article_type" class="input-normal" id="inputType" style="width: 150px">
+                            <option value="">请选择</option>
+                            <volist name="type" id="vo">
+                                <option value="<{$vo.id}>"><{$vo.name}></option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span8">
+                    <label class="control-label">文章作者：</label>
+                    <div class="controls">
+                        <input type="text" name="author" value="<{$data.author}>" class="input-normal control-text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span15">
+                    <label class="control-label">文章概述：</label>
+                    <div class="controls control-row4">
+                        <textarea name="description" class="input-large" data-tip="{text:'请填写文章概述！'}" type="text"><{$data.title}></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group control-row4 span5" style="height: 130px;">
+                    <label class="control-label">文章配图：</label>
+                    <div class="controls">
+                        <input type="hidden" id="picture" value="<{$data.img}>" name="img" /><button type="button" class="btn btn-primary btn-xs" id="upLoadImg" >上传图片</button>
+                        <script type="text/plain" id="upload_ue"></script>
+                    </div>
+                </div>
+                <div class="control-group span8">
+                    <div class="controls">
+                        <img src="<{$data.img}>" id="info_img"  style="border: #c3c3d6 solid 1px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="control-group span26">
+                    <label class="control-label">文章详情：</label>
+                    <div class="controls" style="height: 450px">
+                        <script type="text/plain" id="content" name="content"></script>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-actions actions-bar">
+                <div class="span13 offset3 ">
+                    <button type="submit" class="button button-primary">修改</button>
+                    <button type="reset" class="button">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<script type="text/javascript" src="__PUBLIC__/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+    window.UEDITOR_HOME_URL = "__PUBLIC__/Ueditor/";
+</script>
+<load href="__PUBLIC__/Ueditor/ueditor.config.js" />
+<load href="__PUBLIC__/Ueditor/ueditor.all.min.js" />
+<script type="text/javascript" src="__PUBLIC__/assets/js/bui-min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/assets/js/config-min.js"></script>
+<script type="text/javascript">
+    BUI.use('common/page');
+</script>
+<script type="text/javascript">
+    BUI.use('bui/form',function(Form){
+        new Form.HForm({
+            srcNode : '#J_Form',
+            submitType : 'ajax',
+            callback : function(data){
+                if(data.success){
+                    top.topManager.openPage({
+                        id : 'article-list',
+                        isClose : true
+                    });
+                    top.topManager.reloadPage('article-list');
+                }else{
+                    BUI.Message.Alert('修改失败','error');
+                }
+            }
+        }).render();
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        $("#inputType option[value='<{$data.article_type}>']").attr("selected","true");
+        $('#info_img').show();
+        /*图片上传*/
+        var _editor = UE.getEditor('upload_ue');
+        _editor.ready(function () {
+            //设置编辑器不可用
+            _editor.setDisabled();
+            //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+            _editor.hide();
+            //侦听图片上传
+            _editor.addListener('beforeInsertImage', function (t, arg) {
+                //将地址赋值给相应的input,只去第一张图片的路径
+                $("#picture").val(arg[0].src);
+                $('#info_img').attr('src',arg[0].src).show();
+                //图片预览
+//                                        $("#preview").attr("src", arg[0].src);
+            })
+            //侦听文件上传，取上传文件列表中第一个上传的文件的路径
+            _editor.addListener('afterUpfile', function (t, arg) {
+                $("#file").attr("value", _editor.options.filePath + arg[0].url);
+            })
+
+        });
+
+        $('#upLoadImg').click(function(){
+            var myImage = _editor.getDialog("insertimage");
+            myImage.open();
+        });
+        /*富文本编辑器*/
+        var editor;
+        //具体参数配置在  editor_config.js  中
+        var options = {
+            initialFrameWidth:700,        //初化宽度
+            initialFrameHeight:300,        //初化高度
+            focus:false,                        //初始化时，是否让编辑器获得焦点true或false
+            maximumWords:10000        //允许的最大字符数
+        };
+        //                                window.UEDITOR_CONFIG.imageUrl="<{:U('Public/uploadimg')}>";
+        //                                window.UEDITOR_CONFIG.imagePath='__UPLOAD__/';
+        editor = new UE.ui.Editor(options);
+
+        editor.render("content");
+        editor.ready(function(){
+            editor.setContent('<{$data.content}>');     //加载数据库Action.class.PHP传过来的值
+        });
+    });
+</script>
+</volist>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!--<include file="./Admin/Tpl/Public/header.html" />-->
+<!--<script type="text/javascript">-->
+    <!--window.UEDITOR_HOME_URL = "__PUBLIC__/Ueditor/";-->
+<!--</script>-->
+<!--<load href="__PUBLIC__/Ueditor/ueditor.config.js" />-->
+<!--<load href="__PUBLIC__/Ueditor/ueditor.all.min.js" />-->
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-8">-->
+            <!--<ol class="breadcrumb">-->
+                <!--<li><a href="__APP__">首页</a></li>-->
+                <!--<li><a href="__URL__">产品中心</a></li>-->
+                <!--<li><a href="__URL__/type">产品类型</a></li>-->
+                <!--<li class="active">修改</li>-->
+            <!--</ol>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-8">-->
+            <!--<h3>修改产品类型</h3>-->
+            <!--<volist name="product_type" id="data">-->
+            <!--<form action="__URL__/doModifyType/id/<{$data.id}>" method="post" class="form-horizontal" role="form">-->
+                <!--<div class="form-group">-->
+                    <!--<label for="inputName" class="col-sm-2 control-label">产品类型名称</label>-->
+                    <!--<div class="col-sm-10">-->
+                        <!--<input type="text" name="name" class="form-control" value="<{$data.name}>" id="inputName" placeholder="请输入产品类型名称">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<script type="text/plain" id="upload_ue"></script>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="picture" class="col-sm-2 control-label">产品图片：</label>-->
+                    <!--<div class="col-sm-3">-->
+                        <!--<input type="text" id="picture" name="img" value="<{$data.img}>" />-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-3">-->
+                        <!--<button type="button" class="btn btn-primary btn-xs" id="upLoadImg" >上传图片</button>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-3">-->
+                        <!--<span class="help-block">请设置产品图片！</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<script type="text/javascript">-->
+                    <!--$(function(){-->
+                        <!--/*图片上传*/-->
+                        <!--var _editor = UE.getEditor('upload_ue');-->
+                        <!--_editor.ready(function () {-->
+                            <!--//设置编辑器不可用-->
+                            <!--_editor.setDisabled();-->
+                            <!--//隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏-->
+                            <!--_editor.hide();-->
+                            <!--//侦听图片上传-->
+                            <!--_editor.addListener('beforeInsertImage', function (t, arg) {-->
+                                <!--//将地址赋值给相应的input,只去第一张图片的路径-->
+                                <!--$("#picture").val(arg[0].src);-->
+                                <!--//图片预览-->
+<!--//                                        $("#preview").attr("src", arg[0].src);-->
+                            <!--})-->
+                            <!--//侦听文件上传，取上传文件列表中第一个上传的文件的路径-->
+                            <!--_editor.addListener('afterUpfile', function (t, arg) {-->
+                                <!--$("#file").attr("value", _editor.options.filePath + arg[0].url);-->
+                            <!--})-->
+
+                        <!--});-->
+
+                        <!--$('#upLoadImg').click(function(){-->
+                            <!--var myImage = _editor.getDialog("insertimage");-->
+                            <!--myImage.open();-->
+                        <!--});-->
+                    <!--});-->
+                <!--</script>-->
+                <!--<div class="form-group">-->
+                    <!--<div class="col-sm-offset-2 col-sm-10">-->
+                        <!--<button type="submit" class="btn btn-default">修改</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+            <!--</volist>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>修改产品类型 - 产品中心</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="__PUBLIC__/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/assets/css/page-min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #info_img{
+            width: 320px;
+            height: 110px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<volist name="product_type" id="data">
+    <div class="container">
+        <div class="row">
+
+            <form id="J_Form" class="form-horizontal span24" action="__URL__/doModifyType/id/<{$data.id}>"  >
+                <div class="row">
+                    <div class="control-group span8">
+                        <label class="control-label"><s>*</s>类型名称：</label>
+                        <div class="controls">
+                            <input type="text" name="name" value="<{$data.name}>"  data-rules="{required:true}" class="input-normal control-text">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="control-group control-row4 span5" style="height: 130px;">
+                        <label class="control-label">产品配图：</label>
+                        <div class="controls">
+                            <input type="hidden" id="picture" value="<{$data.img}>" name="img" /><button type="button" class="btn btn-primary btn-xs" id="upLoadImg" >上传图片</button>
+                            <script type="text/plain" id="upload_ue"></script>
+                        </div>
+                    </div>
+                    <div class="control-group span8">
+                        <div class="controls">
+                            <img src="<{$data.img}>" id="info_img"  style="border: #c3c3d6 solid 1px;" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-actions actions-bar">
+                    <div class="span13 offset3 ">
+                        <button type="submit" class="button button-primary">修改</button>
+                        <button type="reset" class="button">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    <script type="text/javascript" src="__PUBLIC__/assets/js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript">
+        window.UEDITOR_HOME_URL = "__PUBLIC__/Ueditor/";
+    </script>
+    <load href="__PUBLIC__/Ueditor/ueditor.config.js" />
+    <load href="__PUBLIC__/Ueditor/ueditor.all.min.js" />
+    <script type="text/javascript" src="__PUBLIC__/assets/js/bui-min.js"></script>
+
+    <script type="text/javascript" src="__PUBLIC__/assets/js/config-min.js"></script>
+    <script type="text/javascript">
+        BUI.use('common/page');
+    </script>
+    <script type="text/javascript">
+        BUI.use('bui/form',function(Form){
+            new Form.HForm({
+                srcNode : '#J_Form',
+                submitType : 'ajax',
+                callback : function(data){
+                    if(data.success){
+                        top.topManager.openPage({
+                            id : 'product-type-list',
+                            isClose : true
+                        });
+                        top.topManager.reloadPage('product-type-list');
+                    }else{
+                        BUI.Message.Alert('修改失败','error');
+                    }
+                }
+            }).render();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $("#inputType option[value='<{$data.product_type}>']").attr("selected","true");
+            $('#info_img').show();
+            /*图片上传*/
+            var _editor = UE.getEditor('upload_ue');
+            _editor.ready(function () {
+                //设置编辑器不可用
+                _editor.setDisabled();
+                //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+                _editor.hide();
+                //侦听图片上传
+                _editor.addListener('beforeInsertImage', function (t, arg) {
+                    //将地址赋值给相应的input,只去第一张图片的路径
+                    $("#picture").val(arg[0].src);
+                    $('#info_img').attr('src',arg[0].src).show();
+                    //图片预览
+//                                        $("#preview").attr("src", arg[0].src);
+                })
+                //侦听文件上传，取上传文件列表中第一个上传的文件的路径
+                _editor.addListener('afterUpfile', function (t, arg) {
+                    $("#file").attr("value", _editor.options.filePath + arg[0].url);
+                })
+
+            });
+
+            $('#upLoadImg').click(function(){
+                var myImage = _editor.getDialog("insertimage");
+                myImage.open();
+            });
+        });
+    </script>
+</volist>
+<body>
+</html>
